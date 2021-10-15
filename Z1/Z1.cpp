@@ -31,7 +31,6 @@ void DFS_noRekr(int st, int** b, int num_of_elem)
 	int* mass;
 	int t;
 
-
 }
 
 int main() {
