@@ -31,24 +31,7 @@ void DFS_noRekr(int st, int** b, int num_of_elem)
 	int* mass;
 	int t;
 
-	mass = (int*)malloc(num_of_elem * sizeof(int));
-	for (int i = 0; i < num_of_elem; i++) {
-		mass[i] = 0;
-	}
-	Q.push(st);
-	mass[st] += 1;
-	while (!Q.empty())
-	{
-		t = Q.front();
-		Q.pop();
-		printf("%d ", t + 1);
-		for (int i = 0; i < num_of_elem; i++)
-			if (b[t][i] && !mass[i])
-			{
-				Q.push(i);
-				mass[i] += 1;
-			}
-	}
+
 }
 
 int main() {
@@ -94,7 +77,7 @@ int main() {
 
 	printf("\n");
 
-	printf("\nОбход графа в глубину методом рекурсии\ncтартовая вершина - ");
+	printf("\nОбход графа в глубину методом без рекурсии\ncтартовая вершина - ");
 	scanf_s("%d", &start);
 	printf("Вывод: ");
 	DFS_noRekr(start-1, a, max_size);
