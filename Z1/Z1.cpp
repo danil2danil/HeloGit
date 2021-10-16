@@ -24,12 +24,30 @@ void DFS(int st, int** b, int num_of_elem, bool* visited) {
 	}
 }
 
-void DFS_noRekr(int st, int** b, int num_of_elem)
+void DFS_noRekr(int st, int** b, int num_of_elem, bool* visited)
 {
-	queue<int> Q;
-
-	int* mass;
+	stack <int> Q;
 	int t;
+	for (i = 0; i < max_size; i++)
+	{
+		visited[i] = false;
+	}
+	Q.push(st);
+	visited[st] = true;
+	while (!Q.empty())
+	{
+		t = Q.top();
+		Q.pop();
+		printf("%d ", t + 1);
+		for (int i = 0; i < num_of_elem; i++)
+		{
+			if (b[t][i] == 1 && !visited[i])
+			{
+				Q.push(i);
+				visited[i] = true;
+			}
+		}
+	}
 
 }
 
@@ -38,7 +56,6 @@ int main() {
 	setlocale(LC_ALL, "Rus");
 	srand(time(NULL));
 	
-
 	int** a = new int* [max_size];
 	for (i = 0; i < max_size; i++)
 	{
@@ -79,7 +96,7 @@ int main() {
 	printf("\nОбход графа в глубину методом без рекурсии\ncтартовая вершина - ");
 	scanf_s("%d", &start);
 	printf("Вывод: ");
-	DFS_noRekr(start-1, a, max_size);
+	DFS_noRekr(start-1, a, max_size, vektor);
 
 	_getch();
 }
