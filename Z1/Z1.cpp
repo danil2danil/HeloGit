@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int max_size = 7, i, j, start;
+int max_size = 6, i, j, start;
 int* DIST = (int*)malloc(max_size * sizeof(int));
 
 void BSFD(int st, int** b, int num_of_elem, int *vis) {
