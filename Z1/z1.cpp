@@ -138,25 +138,19 @@ int main(int argc, char* argv[]) {
 
 	setlocale(LC_ALL, "Rus");
 	srand(time(NULL));
+	
 
-	if (argc == 2)
+
+	if (argc == 2)F
 	{
 		if (strcmp(argv[1], "Neor") == 0)
 			no_orient_graph();
 		else if (strcmp(argv[1], "Or") == 0)
 			orient_graph();
 	}
-	else if (argc == 3)
+	else
 	{
-		if (strcmp(argv[1], "Neor") == 0 and strcmp(argv[2], "Or") == 0)
-		{
-			no_orient_graph();
-			orient_graph();
-		}
-		else if (strcmp(argv[1], "Or") == 0 and strcmp(argv[2], "Neor") == 0)
-		{
-			orient_graph();
-			no_orient_graph();
-		}
+		no_orient_graph();
+		orient_graph();	
 	}
 }
