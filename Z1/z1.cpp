@@ -38,7 +38,6 @@ void BSFD(int st, int** b, int num_of_elem, int* vis) {
 
 }
 
-
 void no_orient_graph()
 {
 	int** a = new int* [max_size];
@@ -64,7 +63,7 @@ void no_orient_graph()
 			}
 		}
 	}
-	printf("\nНеориентированный граф:\n");
+	printf("\nНеориентированный взвешенный граф:\n");
 	for (i = 0; i < max_size; i++)
 	{
 		DIST[i] = 1000;
@@ -88,6 +87,47 @@ void no_orient_graph()
 	_getch();
 }
 
+void no_orient_graph_NW()
+{
+	int** a = new int* [max_size];
+	for (i = 0; i < max_size; i++)
+	{
+		a[i] = new int[max_size];
+	}
+
+	for (i = 0; i < max_size; i++)
+	{
+		for (j = i + 1; j < max_size; j++)
+		{
+			a[i][j] = rand()%2;
+			a[j][i] = a[i][j];
+		}
+	}
+	printf("\nНеориентированный не взвешенный граф :\n");
+	for (i = 0; i < max_size; i++)
+	{
+		DIST[i] = 1000;
+		for (j = 0; j < max_size; j++)
+		{
+			if (i == j)
+				a[i][j] = 0;
+			printf("%2d", a[i][j]);
+		}
+		printf("\n");
+	}
+
+	printf("\nПоиск расстояний в НЕориентированном графе \ncтартовая вершина - ");
+	scanf_s("%d", &start);
+	BSFD(start - 1, a, max_size, DIST);
+	printf("\nРасстояние из первой:\n");
+	for (i = 0; i < max_size; i++) {
+		printf("до %d = %d\n", i + 1, DIST[i]);
+		DIST[i] = 1000;
+	}
+	_getch();
+}
+
+
 void orient_graph(){
 	int** a = new int* [max_size];
 	for (i = 0; i < max_size; i++)
@@ -110,7 +150,44 @@ void orient_graph(){
 			}
 		}
 	}
-	printf("\n Ориентированный граф:\n");
+	printf("\n Ориентированный взвешенный граф:\n");
+	for (i = 0; i < max_size; i++)
+	{
+		DIST[i] = 1000;
+		for (j = 0; j < max_size; j++)
+		{
+			if (i == j)
+				a[i][j] = 0;
+			printf("%2d", a[i][j]);
+		}
+		printf("\n");
+	}
+
+	printf("\nПоиск расстояний в Ориентированном графе \ncтартовая вершина - ");
+	scanf_s("%d", &start);
+	BSFD(start - 1, a, max_size, DIST);
+	printf("\nРасстояние из первой:\n");
+	for (i = 0; i < max_size; i++) {
+		printf("до %d = %d\n", i + 1, DIST[i]);
+		DIST[i] = 1000;
+	}
+	_getch();
+}
+void orient_grap_NW() {
+	int** a = new int* [max_size];
+	for (i = 0; i < max_size; i++)
+	{
+		a[i] = new int[max_size];
+	}
+
+	for (i = 0; i < max_size; i++)
+	{
+		for (j = 0; j < max_size; j++)
+		{
+			a[i][j] = rand() % 2;
+		}
+	}
+	printf("\n Ориентированный не взвешенный граф:\n");
 	for (i = 0; i < max_size; i++)
 	{
 		DIST[i] = 1000;
@@ -134,6 +211,7 @@ void orient_graph(){
 	_getch();
 }
 
+
 int main(int argc, char* argv[]) {
 
 	setlocale(LC_ALL, "Rus");
@@ -141,16 +219,22 @@ int main(int argc, char* argv[]) {
 	
 
 
-	if (argc == 2)F
+	if (argc > 1)
 	{
-		if (strcmp(argv[1], "Neor") == 0)
+		if (strcmp(argv[1], "NW") == 0)
 			no_orient_graph();
-		else if (strcmp(argv[1], "Or") == 0)
+		else if (strcmp(argv[1], "OW") == 0)
 			orient_graph();
+		else if (strcmp(argv[1], "NN") == 0)
+			no_orient_graph_NW();
+		else if (strcmp(argv[1], "ON") == 0)
+			orient_grap_NW();
 	}
 	else
 	{
 		no_orient_graph();
 		orient_graph();	
+		no_orient_graph_NW();
+		orient_grap_NW();
 	}
 }
